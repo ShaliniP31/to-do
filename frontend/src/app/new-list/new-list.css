@@ -1,0 +1,31 @@
+.new-list {
+  display: flex;
+  background: var(--color-input);
+  border: 2px solid var(--color-header);
+  border-radius: 15px;
+  margin: 8px auto;
+  width: 350px;
+  padding: 4px;
+}
+
+.list-name {
+  border: none;
+  outline: none;
+  padding: 8px;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  background: transparent;
+  flex: 1;
+}
+
+.btn {
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 18px;
+  background: transparent;
+}
+
+.new-list:focus-within {
+  box-shadow: 0 6px 12px var(--color-header);
+}

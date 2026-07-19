@@ -1,0 +1,15 @@
+.header {
+    background-color: var(--color-header);
+    font-size: x-large;
+    font-weight: bolder;
+    padding: 10px;
+    color: wheat;
+    font-family: 'Times New Roman', Times, serif, sans-serif;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    order: 0;
+    height: 30px;
+    flex-shrink: 0;
+    /*the header won't change*/
+}

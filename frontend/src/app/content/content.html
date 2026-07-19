@@ -1,0 +1,9 @@
+<div class="content">
+    @for (list of lists(); track list.id) {
+    <app-list-card [list]="list" (click)="openList(list.id)"></app-list-card>
+    }
+</div>
+@if(selectedListId != 0) {
+<app-list-popup [selectedListId]="selectedListId" (close)="closeList()">
+</app-list-popup>
+}

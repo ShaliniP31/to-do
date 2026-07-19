@@ -1,0 +1,34 @@
+:host {
+    display: block;
+    width: 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.list {
+    background-color: var(--color-list-bg);
+    border: 2px solid var(--color-header);
+    color: black;
+    margin: 0 auto;
+    width: 90%;
+    box-sizing: border-box;
+    height: 280px;
+    border-radius: 10px;
+    box-shadow: 0 6px 8px var(--color-header);
+}
+
+.title-row {
+    justify-content: space-between;
+    border-bottom: black 2px dotted;
+    padding: 10px 10px 5px 10px;
+    font-size: larger;
+}
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+}
+
+li {
+    padding: 2px;
+}

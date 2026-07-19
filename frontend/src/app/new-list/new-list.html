@@ -1,0 +1,7 @@
+<div class="new-list">
+    <input class="list-name" type="text" placeholder="Create your list..." [(ngModel)]="listName">
+    <button class="btn add-btn" [disabled]="!listName.trim()" (click)="addList()">
+        <fa-icon [icon]="faPlus">
+        </fa-icon>
+    </button>
+</div>

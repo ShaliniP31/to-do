@@ -1,0 +1,33 @@
+<div class="overlay">
+  <div class="popup">
+    <div class="title-row">
+      <div class="title-text">
+        {{ selectedList()?.name }}
+        [{{ selectedList()?.id }}]
+      </div>
+      <div class="title-icons">
+        <fa-icon [icon]="faFilter"></fa-icon>
+        <fa-icon [icon]="faBars"></fa-icon>
+        <fa-icon [icon]="faXmark" (click)="closeList()"></fa-icon>
+      </div>
+    </div>
+    <div class="tasks">
+      <table>
+        @for(task of selectedList()?.tasks; track task.id){
+        <tr>
+          <td>{{task.completed}}</td>
+          <td>{{task.name}}</td>
+          <td><fa-icon [icon]="faXmark"></fa-icon></td>
+        </tr>
+        }
+      </table>
+    </div>
+    @if(showNewTaskRow){
+      <div class="add-task">
+    <input type="text" [(ngModel)]="taskName" placeholder="Enter Task Name" (blur)="addTask()"/>
+    <fa-icon [icon]="faXmark" (click)="clearTask()"></fa-icon>
+    </div>
+    }
+    <button class="add-btn" (click)="addTaskRow()">Add Task</button>
+  </div>
+</div>

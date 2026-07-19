@@ -1,0 +1,36 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  width: 500px;
+  min-height: 400px;
+  background-color: var(--color-list-bg);
+  border-radius: 10px;
+  border: 2px solid var(--color-header);
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: black 2px dotted;
+  padding: 10px 10px 5px 10px;
+}
+
+.title-text {
+  font-size: larger;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 2px;
+}
+
+.title-icons {
+  display: flex;
+  justify-content: space-between;
+  width: 80px;
+  padding: 2px;
+}
