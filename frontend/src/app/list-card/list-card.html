@@ -3,7 +3,8 @@
     @if(list.tasks.length > 0) {
     <ul>
         @for(task of list.tasks; track task.id){
-        <li>@if(task.completed){
+        <li>
+            @if(task.completed){
             <fa-icon [icon]="faSquareCheck"></fa-icon>
             } @else{
             <fa-icon [icon]="faSquare"></fa-icon>

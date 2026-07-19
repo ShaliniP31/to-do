@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, inject, computed } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBars, faXmark, faFilter, faCheck, faL } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark, faFilter, faCheck, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ListService } from '../services/list-service';
@@ -17,11 +17,14 @@ export class ListPopup {
   faBars = faBars;
   faFilter = faFilter;
   faCheck = faCheck;
+  faPenToSquare = faPenToSquare;
 
   private listService = inject(ListService);
 
   taskName = '';
   showNewTaskRow = false;
+  showMenu = false;
+  showFilter = false;
 
   @Input() selectedListId!: number;
   selectedList = computed(() =>
@@ -48,5 +51,34 @@ export class ListPopup {
     this.listService.addTask(this.selectedListId, this.taskName);
     this.taskName = '';
     this.showNewTaskRow = false;
+  }
+
+  openMenu() {
+    this.showMenu = true;
+  }
+
+  closeMenu() {
+    this.showMenu = false;
+  }
+
+  openFilter() {
+    this.showFilter = true;
+  }
+
+  closeFilter() {
+    this.showFilter = false;
+  }
+
+  deleteList() {
+    this.closeList();
+    this.listService.deleteList(this.selectedListId);
+  }
+
+  deleteTask(taskId: number) {
+    this.listService.deleteTask(taskId, this.selectedListId);
+  }
+
+  updateTaskCompleted(taskId:number){
+    this.listService.updateTaskCompleted(this.selectedListId, taskId);
   }
 }

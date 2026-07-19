@@ -25,46 +25,80 @@ export class ListService {
         localStorage.setItem('lists', JSON.stringify(lists));
     }
 
-    addList(name: string) {
+    private updateLists(updater: (lists: ListModel[]) => ListModel[]) {
         this.listsSignal.update(lists => {
-            const newList: ListModel = {
+            const updated = updater(lists);
+            this.saveLists(updated);
+            return updated;
+        });
+    }
+    addList(name: string) {
+        this.updateLists(lists => [
+            ...lists,
+            {
                 id: this.nextId++,
                 name,
                 tasks: []
-            };
-            const updateLists = [...lists, newList];
-            this.saveLists(updateLists);
-            return updateLists;
-        });
+            }
+        ]);
+    }
+
+    deleteList(id: number) {
+        this.updateLists(lists =>
+            lists.filter(list => list.id !== id)
+        );
     }
 
     addTask(listId: number, taskName: string) {
-        this.listsSignal.update(lists => {
-            const updateLists = lists.map(list => {
-                if (list.id !== listId) {
-                    return list;
-                }
+        this.updateLists(lists =>
+            lists.map(list => {
+                if (list.id !== listId) return list;
 
                 const nextTaskId =
-                    list.tasks.length === 0
-                        ? 1
-                        : Math.max(...list.tasks.map(task => task.id)) + 1;
-
-                const newTask: TaskModel = {
-                    id: nextTaskId,
-                    name: taskName,
-                    completed: false
-                };
+                    Math.max(0, ...list.tasks.map(t => t.id)) + 1;
 
                 return {
                     ...list,
-                    tasks: [...list.tasks, newTask]
+                    tasks: [
+                        ...list.tasks,
+                        {
+                            id: nextTaskId,
+                            name: taskName,
+                            completed: false
+                        }
+                    ]
                 };
             })
-            this.saveLists(updateLists);
-            return updateLists;
-        });
+        );
     }
 
+    deleteTask(taskId: number, listId: number) {
+        this.updateLists(lists =>
+            lists.map(list => {
+                if (list.id !== listId) return list;
+                return {
+                    ...list,
+                    tasks: list.tasks.filter(task => task.id !== taskId)
+                };
+            })
+        );
+    }
+
+    updateTaskCompleted(listId: number, taskId: number) {
+        this.updateLists(lists =>
+            lists.map(list => {
+                if (list.id !== listId) return list;
+
+                return {
+                    ...list,
+                    tasks: list.tasks.map(task =>
+                        task.id === taskId
+                            ? { ...task, completed: !task.completed }
+                            : task
+                    )
+                };
+            })
+        );
+    }
 
 }

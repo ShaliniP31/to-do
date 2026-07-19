@@ -12,8 +12,11 @@
     width: 90%;
     box-sizing: border-box;
     height: 280px;
+    overflow-y: hidden;
     border-radius: 10px;
     box-shadow: 0 6px 8px var(--color-header);
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .title-row {
@@ -24,11 +27,18 @@
 }
 
 ul {
-  list-style-type: none;
-  padding: 10px;
-  margin: 0;
+    list-style-type: none;
+    padding: 5px 10px;
+    margin: 0;
 }
 
 li {
-    padding: 2px;
+    display: flex;
+    padding: 5px;
+    gap: 5px;
+}
+
+fa-icon {
+    position: relative;
+    top: 1px;
 }

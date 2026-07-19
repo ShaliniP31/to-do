@@ -10,6 +10,7 @@
 .popup {
   width: 500px;
   min-height: 400px;
+  max-height: 550px;
   background-color: var(--color-list-bg);
   border-radius: 10px;
   border: 2px solid var(--color-header);
@@ -33,4 +34,83 @@
   justify-content: space-between;
   width: 80px;
   padding: 2px;
+}
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 120px;
+  background: var(--color-list-bg);
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.dropdown-menu div {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu div:hover {
+  background: var(--color-input);
+}
+
+.tasks {
+  overflow-y: auto;
+  max-height: 450px;
+}
+
+.tasks::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tasks::-webkit-scrollbar-track {
+  background: var(--color-input);
+}
+
+.tasks::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.tasks::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.task-row {
+  display: grid;
+  align-items: start;
+  grid-template-columns: 25px 1fr 20px 20px;
+  gap: 3px;
+  margin: 5px;
+}
+
+.task-text {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--color-header);
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--color-input);
+  position: relative;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: var(--color-header);
+  font-size: 20px;
+  position: absolute;
+  top:-10px;
 }

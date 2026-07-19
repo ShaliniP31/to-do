@@ -6,26 +6,46 @@
         [{{ selectedList()?.id }}]
       </div>
       <div class="title-icons">
-        <fa-icon [icon]="faFilter"></fa-icon>
-        <fa-icon [icon]="faBars"></fa-icon>
+        <div class="dropdown-container">
+          <fa-icon [icon]="faFilter" (click)="openFilter()"></fa-icon>
+          @if(showFilter){
+          <div class="dropdown-menu">
+            <div>All</div>
+            <div>Pending</div>
+            <div>Completed</div>
+          </div>
+          <div class="overlay" (click)="closeFilter()"></div>
+          }
+        </div>
+        <div class="dropdown-container">
+          <fa-icon [icon]="faBars" (click)="openMenu()"></fa-icon>
+          @if(showMenu){
+          <div class="dropdown-menu">
+            <div>Check All</div>
+            <div>Uncheck All</div>
+            <div (click)="deleteList()">Delete List</div>
+          </div>
+          <div class="overlay" (click)="closeMenu()"></div>
+          }
+        </div>
+
         <fa-icon [icon]="faXmark" (click)="closeList()"></fa-icon>
       </div>
     </div>
     <div class="tasks">
-      <table>
-        @for(task of selectedList()?.tasks; track task.id){
-        <tr>
-          <td>{{task.completed}}</td>
-          <td>{{task.name}}</td>
-          <td><fa-icon [icon]="faXmark"></fa-icon></td>
-        </tr>
-        }
-      </table>
+      @for(task of selectedList()?.tasks; track task.id){
+      <div class="task-row">
+        <input type="checkbox" [checked]="task.completed" (click)="updateTaskCompleted(task.id)">
+        <span class="task-text">{{task.name}}</span>
+        <fa-icon [icon]="faPenToSquare"></fa-icon>
+        <fa-icon [icon]="faXmark" (click)="deleteTask(task.id)"></fa-icon>
+      </div>
+      }
     </div>
     @if(showNewTaskRow){
-      <div class="add-task">
-    <input type="text" [(ngModel)]="taskName" placeholder="Enter Task Name" (blur)="addTask()"/>
-    <fa-icon [icon]="faXmark" (click)="clearTask()"></fa-icon>
+    <div class="add-task">
+      <input type="text" [(ngModel)]="taskName" placeholder="Enter Task Name" (blur)="addTask()" />
+      <fa-icon [icon]="faXmark" (click)="clearTask()"></fa-icon>
     </div>
     }
     <button class="add-btn" (click)="addTaskRow()">Add Task</button>
