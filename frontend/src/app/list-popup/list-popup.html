@@ -26,12 +26,15 @@
       </div>
       }
     </div>
-    @if(showNewTaskRow){
-    <div class="add-task">
-      <input type="text" [(ngModel)]="taskName" placeholder="Enter Task Name" (blur)="addTask()" />
-      <fa-icon [icon]="faXmark" (click)="clearTask()"></fa-icon>
+    <div class="new-task">
+      @if(showNewTaskRow){
+      <div class="add-task">
+        <input type="text" [(ngModel)]="taskName" placeholder="Enter Task Name" (blur)="addTask()" #addTaskText />
+        <fa-icon [icon]="faXmark" (mousedown)="clearTask()">
+        </fa-icon>
+      </div>
+      }
+      <button class="add-btn" (click)="addTaskRow()">Add Task</button>
     </div>
-    }
-    <button class="add-btn" (click)="addTaskRow()">Add Task</button>
   </div>
 </div>

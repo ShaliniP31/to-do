@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, inject, computed } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject, computed, ElementRef, ViewChild } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faXmark, faFilter, faCheck, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
@@ -38,8 +38,13 @@ export class ListPopup {
     this.close.emit();
   }
 
+  @ViewChild('addTaskText') addTaskText!: ElementRef<HTMLInputElement>;
+
   addTaskRow() {
     this.showNewTaskRow = true;
+    setTimeout(() => {
+      this.addTaskText.nativeElement.focus();
+    });
   }
 
   clearTask() {
@@ -48,6 +53,10 @@ export class ListPopup {
   }
 
   addTask() {
+    if (!this.taskName.trim()) {
+      this.showNewTaskRow = false;
+      return;
+    }
     this.listService.addTask(this.selectedListId, this.taskName);
     this.taskName = '';
     this.showNewTaskRow = false;
@@ -78,7 +87,7 @@ export class ListPopup {
     this.listService.deleteTask(taskId, this.selectedListId);
   }
 
-  updateTaskCompleted(taskId:number){
+  updateTaskCompleted(taskId: number) {
     this.listService.updateTaskCompleted(this.selectedListId, taskId);
   }
 }
